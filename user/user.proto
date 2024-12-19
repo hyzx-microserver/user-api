@@ -2,18 +2,44 @@ syntax = "proto3";
 
 package user.v1;
 
-option go_package = "user/v1;v1";
+option go_package = "user-service/api/user/v1;v1";
 
+// 用户服务
 service UserService {
-  rpc GetUser (GetUserRequest) returns (GetUserReply);
+  // 获取用户基础信息
+  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse);
+
+  // 获取用户角色
+  rpc GetUserRoles(GetUserRolesRequest) returns (GetUserRolesResponse);
 }
 
-message GetUserRequest {
-  string id = 1;
+// 请求与响应消息
+
+// 获取用户信息请求
+message GetUserInfoRequest {
+  string user_id = 1; // 用户 ID
 }
 
-message GetUserReply {
-  string id = 1;
-  string name = 2;
-  string email = 3;
+// 获取用户信息响应
+message GetUserInfoResponse {
+  string user_id = 1;   // 用户 ID
+  string username = 2;  // 用户名
+  string email = 3;     // 邮箱
+  string phone = 4;     // 手机号
+}
+
+// 获取用户角色请求
+message GetUserRolesRequest {
+  string user_id = 1; // 用户 ID
+}
+
+// 获取用户角色响应
+message GetUserRolesResponse {
+  repeated Role roles = 1; // 用户角色列表
+}
+
+// 角色信息
+message Role {
+  string role_id = 1;   // 角色 ID
+  string role_name = 2; // 角色名称
 }
