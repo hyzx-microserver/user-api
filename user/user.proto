@@ -4,7 +4,7 @@ package user.v1;
 
 option go_package = "user-service/api/user/v1;v1";
 
-import "b2c-common-api/proto/common.proto";
+import "github.com/hyzx-microserver/b2c-common-api/proto/common.proto";
 
 // 用户服务
 service UserService {

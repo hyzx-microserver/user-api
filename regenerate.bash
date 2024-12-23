@@ -26,7 +26,7 @@ fi
 export PATH=$PATH:$(go env GOPATH)/bin:/usr/local/bin
 
 # 检查 b2c-common-api 目录是否存在，如果不存在则拉取
-COMMON_API_DIR="./b2c-common-api"  # 修改为你想存放的本地路径
+COMMON_API_DIR="./github.com/hyzx-microserver/b2c-common-api"  # 修改为你想存放的本地路径
 if [ ! -d "$COMMON_API_DIR" ]; then
     echo "b2c-common-api 目录不存在，开始拉取代码..."
     git clone git@github.com:hyzx-microserver/b2c-common-api.git "$COMMON_API_DIR" || exit  # 使用你自己的 Git 仓库地址
