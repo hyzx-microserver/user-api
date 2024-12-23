@@ -26,17 +26,17 @@ message GetUserRespDTO {
 }
 
 // 获取用户角色请求
-message GetUserRolesReq {
+message GetUserRolesReqDTO {
   string user_id = 1; // 用户 ID
 }
 
 // 获取用户角色响应
-message GetUserRolesResp{
-  repeated Role roles = 1; // 用户角色列表
+message GetUserRolesRespDTO{
+  repeated RoleDTO roles = 1; // 用户角色列表
 }
 
 // 角色信息
-message Role {
+message RoleDTO {
   string role_id = 1;   // 角色 ID
   string role_name = 2; // 角色名称
 }
