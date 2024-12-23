@@ -11,7 +11,7 @@
 # Versions used:
 #	protoc:        3.14.0
 #	protoc-gen-go: v1.30.0
-#protoc-gen-go-http 0.0.1
+#	protoc-gen-go-http 0.0.1
 
 echo "==> 开始生成代码..."
 echo "当前工作目录: $(pwd)"
@@ -25,10 +25,22 @@ fi
 # 设置环境变量，确保插件路径正确
 export PATH=$PATH:$(go env GOPATH)/bin:/usr/local/bin
 
+# 检查 b2c-common-api 目录是否存在，如果不存在则拉取
+COMMON_API_DIR="./b2c-common-api"  # 修改为你想存放的本地路径
+if [ ! -d "$COMMON_API_DIR" ]; then
+    echo "b2c-common-api 目录不存在，开始拉取代码..."
+    git clone git@github.com:hyzx-microserver/b2c-common-api.git "$COMMON_API_DIR" || exit  # 使用你自己的 Git 仓库地址
+else
+    echo "b2c-common-api 目录已存在，跳过拉取步骤。"
+    cd "$COMMON_API_DIR" || exit
+    git pull origin main || exit  # 使用你对应的 Git 分支
+    cd - || exit
+fi
+
 # 遍历所有 .proto 文件
 for proto_file in $(find . -name "*.proto" | sed "s|^\./||"); do
     # 排除指定文件
-    if [[ "$proto_file" != "github.com/cargod-bj/b2c-proto-common/common/common.proto" ]] && \
+    if [[ "$proto_file" != "github.com/hyzx-microserver/b2c-common-api/proto/common.proto" ]] && \
        [[ "$proto_file" != "google/protobuf/any.proto" ]] && \
        [[ "$proto_file" != "hello/hello.proto" ]]; then
 

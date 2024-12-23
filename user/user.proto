@@ -4,13 +4,15 @@ package user.v1;
 
 option go_package = "user-service/api/user/v1;v1";
 
+import "b2c-common-api/proto/common.proto";
+
 // 用户服务
 service UserService {
   // 获取用户基础信息
-  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse);
+  rpc GetUserInfo(GetUserInfoRequest) returns (common.ApiResponse);
 
   // 获取用户角色
-  rpc GetUserRoles(GetUserRolesRequest) returns (GetUserRolesResponse);
+  rpc GetUserRoles(GetUserRolesRequest) returns (common.ApiResponse);
 }
 
 // 请求与响应消息
