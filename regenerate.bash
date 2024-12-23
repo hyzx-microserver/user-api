@@ -53,7 +53,7 @@ for proto_file in $(find . -name "*.proto" | sed "s|^\./||"); do
         fi
 
         # 执行 protoc 命令
-        echo "执行命令: protoc --proto_path=. --go_out=paths=source_relative:. --go-grpc_out=paths=source_relative:. $proto_file"
+        echo "执行命令: protoc --proto_path=. --proto_path=./github.com/hyzx-microserver --go_out=paths=source_relative:. --go-grpc_out=paths=source_relative:. $proto_file"
         protoc \
             --proto_path=. \
             --go_out=paths=source_relative:. \
