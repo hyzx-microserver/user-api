@@ -19,15 +19,16 @@ message GetUserReqDTO {
 
 // 获取用户信息响应
 message GetUserRespDTO {
-  string user_id = 1;   // 用户 ID
+  int64 user_id = 1;   // 用户 ID
   string username = 2;  // 用户名
   string email = 3;     // 邮箱
   string phone = 4;     // 手机号
+  uint32 status = 5;
 }
 
 // 获取用户角色请求
 message GetUserRolesReqDTO {
-  string user_id = 1; // 用户 ID
+  int64 user_id = 1; // 用户 ID
 }
 
 // 获取用户角色响应
@@ -37,6 +38,7 @@ message GetUserRolesRespDTO{
 
 // 角色信息
 message RoleDTO {
-  string role_id = 1;   // 角色 ID
+  int64 role_id = 1;   // 角色 ID
   string role_name = 2; // 角色名称
+  string method = 3;
 }
