@@ -7,9 +7,9 @@ option go_package = "user-service/api/user/v1;v1";
 import "github.com/hyzx-microserver/b2c-common-api/proto/common.proto";
 
 service UserService {
-  rpc GetUser(GetUserReqDTO) returns (common.ApiResponse);
+  rpc GetUser(GetUserReqDTO) returns (common.RespDTO);
 
-  rpc GetUserRoles(GetUserRolesReqDTO) returns (common.ApiResponse);
+  rpc GetUserRoles(GetUserRolesReqDTO) returns (common.RespDTO);
 }
 
 // 获取用户信息请求

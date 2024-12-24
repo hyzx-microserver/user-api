@@ -28,8 +28,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
-	GetUser(ctx context.Context, in *GetUserReqDTO, opts ...grpc.CallOption) (*common.ApiResponse, error)
-	GetUserRoles(ctx context.Context, in *GetUserRolesReqDTO, opts ...grpc.CallOption) (*common.ApiResponse, error)
+	GetUser(ctx context.Context, in *GetUserReqDTO, opts ...grpc.CallOption) (*common.RespDTO, error)
+	GetUserRoles(ctx context.Context, in *GetUserRolesReqDTO, opts ...grpc.CallOption) (*common.RespDTO, error)
 }
 
 type userServiceClient struct {
@@ -40,8 +40,8 @@ func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 	return &userServiceClient{cc}
 }
 
-func (c *userServiceClient) GetUser(ctx context.Context, in *GetUserReqDTO, opts ...grpc.CallOption) (*common.ApiResponse, error) {
-	out := new(common.ApiResponse)
+func (c *userServiceClient) GetUser(ctx context.Context, in *GetUserReqDTO, opts ...grpc.CallOption) (*common.RespDTO, error) {
+	out := new(common.RespDTO)
 	err := c.cc.Invoke(ctx, UserService_GetUser_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -49,8 +49,8 @@ func (c *userServiceClient) GetUser(ctx context.Context, in *GetUserReqDTO, opts
 	return out, nil
 }
 
-func (c *userServiceClient) GetUserRoles(ctx context.Context, in *GetUserRolesReqDTO, opts ...grpc.CallOption) (*common.ApiResponse, error) {
-	out := new(common.ApiResponse)
+func (c *userServiceClient) GetUserRoles(ctx context.Context, in *GetUserRolesReqDTO, opts ...grpc.CallOption) (*common.RespDTO, error) {
+	out := new(common.RespDTO)
 	err := c.cc.Invoke(ctx, UserService_GetUserRoles_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -62,8 +62,8 @@ func (c *userServiceClient) GetUserRoles(ctx context.Context, in *GetUserRolesRe
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
 type UserServiceServer interface {
-	GetUser(context.Context, *GetUserReqDTO) (*common.ApiResponse, error)
-	GetUserRoles(context.Context, *GetUserRolesReqDTO) (*common.ApiResponse, error)
+	GetUser(context.Context, *GetUserReqDTO) (*common.RespDTO, error)
+	GetUserRoles(context.Context, *GetUserRolesReqDTO) (*common.RespDTO, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -71,10 +71,10 @@ type UserServiceServer interface {
 type UnimplementedUserServiceServer struct {
 }
 
-func (UnimplementedUserServiceServer) GetUser(context.Context, *GetUserReqDTO) (*common.ApiResponse, error) {
+func (UnimplementedUserServiceServer) GetUser(context.Context, *GetUserReqDTO) (*common.RespDTO, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
-func (UnimplementedUserServiceServer) GetUserRoles(context.Context, *GetUserRolesReqDTO) (*common.ApiResponse, error) {
+func (UnimplementedUserServiceServer) GetUserRoles(context.Context, *GetUserRolesReqDTO) (*common.RespDTO, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserRoles not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
