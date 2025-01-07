@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+option go_package = "user-service/api/op_user/v1;v1";
+
+import "github.com/hyzx-microserver/b2c-common-api/proto/common.proto";
+
+service UserService {
+  // 查询用户信息接口
+  rpc GetUserInfo(GetUserInfoRequest) returns (common.RespDTO);
+
+  // 更新用户信息接口
+  rpc UpdateUserInfo(UpdateUserInfoRequest) returns (common.RespDTO);
+
+  // 用户认证接口
+  rpc SubmitKYC(SubmitKYCRequest) returns (common.RespDTO);
+
+  // 查询用户会员信息接口
+  rpc GetMembershipInfo(GetMembershipInfoRequest) returns (common.RespDTO);
+
+  // 更新用户会员信息接口
+  rpc UpdateMembership(UpdateMembershipRequest) returns (common.RespDTO);
+}
+
+message GetUserInfoRequest {
+  string user_id = 1;
+}
+
+message GetUserInfoResponse {
+  string username = 1;
+  string phone = 2;
+  string email = 3;
+  string avatar = 4;
+}
+
+message UpdateUserInfoRequest {
+  string user_id = 1;
+  string username = 2;
+  string phone = 3;
+  string email = 4;
+  string avatar = 5;
+}
+
+message UpdateUserInfoResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message SubmitKYCRequest {
+  string user_id = 1;
+  string id_card = 2;
+}
+
+message SubmitKYCResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message GetMembershipInfoRequest {
+  string user_id = 1;
+}
+
+message GetMembershipInfoResponse {
+  string membership_type = 1; // "normal" or "vip"
+  string membership_expiry = 2;
+}
+
+message UpdateMembershipRequest {
+  string user_id = 1;
+  string membership_type = 2;
+  string membership_expiry = 3;
+}
+
+message UpdateMembershipResponse {
+  bool success = 1;
+  string message = 2;
+}
